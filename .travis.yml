@@ -17,8 +17,16 @@ script:
 
 after_success:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  - docker push comurule/udagram-frontend
-  - docker push comurule/udagram-api-feed
-  - docker push comurule/udagram-api-user
-  - docker push comurule/reverseproxy
+
+  # Tagging 
+  - docker tag udagram-api-feed comurule/udagram-api-feed:v1
+  - docker tag udagram-api-user comurule/udagram-api-user:v1
+  - docker tag udagram-frontend comurule/udagram-frontend:v1
+  - docker tag reverseproxy comurule/reverseproxy:v1
+  
+  # Push
+  - docker push comurule/udagram-frontend:v1
+  - docker push comurule/udagram-api-feed:v1
+  - docker push comurule/udagram-api-user:v1
+  - docker push comurule/reverseproxy:v1
 
