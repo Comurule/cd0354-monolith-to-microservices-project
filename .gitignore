@@ -31,6 +31,7 @@ $RECYCLE.BIN/
 postgres_dev/
 logfile
 set_env.sh
+k8s/
 
 .DS_Store
 Thumbs.db
