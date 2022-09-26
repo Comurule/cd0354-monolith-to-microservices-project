@@ -3,15 +3,21 @@ import {config} from './config/config';
 
 
 // Configure AWS
-const credentials = new AWS.SharedIniFileCredentials({profile: config.aws_profile});
-AWS.config.credentials = credentials;
+// const credentials = new AWS.SharedIniFileCredentials({profile: config.aws_profile});
+// AWS.config.credentials = credentials;
 
 export const s3 = new AWS.S3({
+  apiVersion: '2006-03-01',
+  accessKeyId: config.access_key_id,
+  secretAccessKey: config.secret_access_key,
   signatureVersion: 'v4',
   region: config.aws_region,
   params: {Bucket: config.aws_media_bucket},
 });
-
+console.log({
+  s3:s3.config,
+  accessKeyId: config.access_key_id,
+  secretAccessKey: config.secret_access_key,})
 // Generates an AWS signed URL for retrieving objects
 export function getGetSignedUrl( key: string ): string {
   const signedUrlExpireSeconds = 60 * 5;
